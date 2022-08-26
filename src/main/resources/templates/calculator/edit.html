@@ -6,13 +6,16 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/calculator/{id}(id=${example.getId()})}" th:object="${mathExample}">
+<form th:method="PATCH" th:action="@{/calculator/{id}(id=${example.getId()})}" th:object="${example}">
 
-    <label for="example">Введите математический пример: </label>
-    <input type="text" id="example" name="example"/>
+    <p th:text="${'Неизмененный пример: ' + example.getExample() + '=' + example.getResult()}">VALUE</p>
+
+    <label for="example">Введите измененный математический пример: </label>
+
+    <input type="text"  id="example" name="example"/>
     <br/>
 
-    <label for="result">Введите результат примера: </label>
+    <label for="result">Введите измененный результат примера: </label>
     <input type="text" id="result" name="result"/>
     <br/>
 

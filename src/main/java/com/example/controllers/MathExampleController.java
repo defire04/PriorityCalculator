@@ -54,7 +54,7 @@ public class MathExampleController {
         mathExampleService.save(newMathExample);
         return "redirect:/calculator/" + newMathExample.getId();
     }
-///////-----
+
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable ("id") int id){
         model.addAttribute("example", mathExampleService.findOne(id));
@@ -62,8 +62,7 @@ public class MathExampleController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("mathExample")  MathExample mathExample, @PathVariable("id") int id){
-
+    public String update(@ModelAttribute("mathExample")  MathExample mathExample,  @PathVariable("id") int id){
 
         mathExampleService.update(id, mathExample);
         return "redirect:/calculator";
@@ -74,20 +73,4 @@ public class MathExampleController {
         mathExampleService.delete(id);
         return "redirect:/calculator";
     }
-
-
-
-
-
-    @GetMapping("/result")
-    public String result(Model model, MathExample example) {
-        System.out.println("-------------");
-        System.out.println(example.getExample());
-        System.out.println("-------------");
-        model.addAttribute("example", example);
-        return "calculator/result";
-    }
-
-
-
 }
