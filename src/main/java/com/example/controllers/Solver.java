@@ -1,6 +1,5 @@
 package com.example.controllers;
 
-import com.example.model.MathExample;
 
 import java.util.Stack;
 
@@ -31,7 +30,6 @@ public class Solver {
             }
             prepareExpression.append(expression.charAt(i));
         }
-        System.out.println(prepareExpression);
         return expressionToRPN(prepareExpression.toString());
     }
 
@@ -69,7 +67,6 @@ public class Solver {
         while (!stack.empty()) {
             current.append(stack.pop());
         }
-//        System.out.println(current);
         return RPNToResult(String.valueOf(current));
     }
 
@@ -78,15 +75,10 @@ public class Solver {
         StringBuilder operand = new StringBuilder();
         Stack<Double> stack = new Stack<>();
 
-
         for (int i = 0; i < rpn.length(); i++) {
-
-
             if (rpn.charAt(i) == ' ') {
                 continue;
             }
-
-
             if (getPrioritySign(String.valueOf(rpn.charAt(i))) == 0) {
                 while (rpn.charAt(i) != ' ' && getPrioritySign(String.valueOf(rpn.charAt(i))) == 0) {
                     operand.append(rpn.charAt(i++));
@@ -115,19 +107,6 @@ public class Solver {
                 }
             }
         }
-
-
-//        for(String symbol : rpn.split("")){
-//            if(symbol.equals(" ")){
-//                continue;
-//            } else if (getPrioritySign(symbol) == 0) {
-//                while (!(symbol.equals(" ")) && getPrioritySign(symbol) == 0  ){
-//                    operand += symbol;
-//                }
-//            }
-//        }
-//
-//
         return stack.pop();
     }
 

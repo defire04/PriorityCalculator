@@ -48,8 +48,9 @@ public class MathExampleController {
         MathExample newMathExample = new MathExample();
         newMathExample.setExample(mathExample);
 
-        // Решение
-        newMathExample.setResult("2323");
+
+
+        newMathExample.setResult(Double.toString(Solver.preparingExpression(mathExample)));
 
         mathExampleService.save(newMathExample);
         return "redirect:/calculator/" + newMathExample.getId();
