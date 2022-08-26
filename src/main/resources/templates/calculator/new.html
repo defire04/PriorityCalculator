@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+
+
+<form th:method="POST" th:action="@{/calculator}" th:object="${example}">
+    <label for="example">Введите математический пример: </label>
+    <input type="text" id="example" name="example"/>
+    <br/>
+    <input type="submit" value="Решить!"/>
+</form>
+
+
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Example</title>
+</head>
+<body>
+
+<form th:method="PATCH" th:action="@{/calculator/{id}(id=${example.getId()})}" th:object="${mathExample}">
+
+    <label for="example">Введите математический пример: </label>
+    <input type="text" id="example" name="example"/>
+    <br/>
+
+    <label for="result">Введите результат примера: </label>
+    <input type="text" id="result" name="result"/>
+    <br/>
+
+    <input type="submit" value="Изменить!"/>
+</form>
+</body>
+</html>

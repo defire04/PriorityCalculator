@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+</head>
+<body>
+<p th:text="${example.getExample() + '=' + example.getResult()}">VALUE</p>
+
+
+<form th:action="@{/calculator/{id}/edit(id=${example.getId()})}">
+    <input type="submit" value="Редактировать">
+</form>
+
+<form th:method="DELETE" th:action="@{/calculator/{id}(id=${example.getId()})}">
+    <input type="submit" value="Удалить"/>
+</form>
+
+<form th:action="@{/calculator}">
+    <input type="submit" value="К примерам"/>
+</form>
+
+</body>
+
+</html>

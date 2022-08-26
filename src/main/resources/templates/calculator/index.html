@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Math Examples</title>
+</head>
+<body>
+
+<div th:each="example : ${examples}" >
+    <a th:href="@{/calculator/{id}(id=${example.getId()})}"
+       th:text="${example.getExample() + '=' + example.getResult()}">user</a>
+</div>
+
+
+<br/>
+<hr/>
+
+
+<form th:action="@{/calculator/new}">
+    <input type="submit" value="Решить новый пример"/>
+</form>
+
+<!--<form th:action="@{/books}">-->
+<!--    <input type="submit" value="К книгам ">-->
+<!--</form>-->
+</body>
+</html>
