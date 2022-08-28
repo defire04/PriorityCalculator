@@ -10,8 +10,6 @@
 <form th:method="POST" th:action="@{/calculator}" th:object="${mathExample}">
     <label for="example">Введите математический пример: </label>
             <input type="text" id="example" name="example"/>
-<!--    <input type="text" th:field="*{example}" id="example"/>-->
-<!--    <div style="color:red" th:if="${#fields.hasErrors('example')}" th:errors="*{example}">Math Example Error</div>-->
 
     <br/>
     <input type="submit" value="Решить!"/>

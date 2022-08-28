@@ -6,6 +6,8 @@
 </head>
 <body>
 
+
+
 <div th:each="example : ${examples}" >
     <a th:href="@{/calculator/{id}(id=${example.getId()})}"
        th:text="${example.getExample() + '=' + example.getResult()}">user</a>
@@ -20,8 +22,13 @@
     <input type="submit" value="Решить новый пример"/>
 </form>
 
-<!--<form th:action="@{/books}">-->
-<!--    <input type="submit" value="К книгам ">-->
-<!--</form>-->
+<form th:method="POST" th:action="@{/calculator/search}">
+    <label for="searchingRequest">Введите знак(<, >, = ) результат выражения\ий которое\ых хотите найти!  </label>
+    <input type="text" id="searchingRequest" name="searchingRequest"/>
+
+    <input type="submit" value="Найти выражение по результату!"/>
+</form>
+
+
 </body>
 </html>

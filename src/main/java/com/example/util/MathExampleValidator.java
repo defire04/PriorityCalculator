@@ -1,15 +1,12 @@
-package com.example.sql.util;
+package com.example.util;
 
 import com.example.model.MathExample;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import org.springframework.stereotype.Component;
 
 @Component
 public class MathExampleValidator implements Validator {
-
-
-
     @Override
     public boolean supports(Class<?> clazz) {
         return MathExample.class.equals(clazz);

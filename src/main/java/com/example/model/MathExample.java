@@ -11,16 +11,16 @@ public class MathExample {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Pattern(regexp = "^[^A-Za-z]+$", message = "В выражении есть недопустимые символы!")
+    @Pattern(regexp = "^[^A-Za-zА-Яа-я]+$", message = "В выражении есть недопустимые символы!")
     @Column(name = "example")
     private String example;
     @Column(name = "result")
-    private String result;
+    private double result;
 
     public MathExample() {
     }
 
-    public MathExample(int id, String example, String result) {
+    public MathExample(int id, String example, double result) {
         this.id = id;
         this.example = example;
         this.result = result;
@@ -46,11 +46,11 @@ public class MathExample {
         this.example = example;
     }
 
-    public String getResult() {
+    public double getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(double result) {
         this.result = result;
     }
 

@@ -1,13 +1,13 @@
 package com.example.services;
 
-import com.example.model.MathExample;
-import com.example.repositories.MathExampleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import com.example.model.MathExample;
+import org.springframework.stereotype.Service;
+import com.example.repositories.MathExampleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
@@ -47,5 +47,14 @@ public class MathExampleService {
 
 
 
+    public List<MathExample> findByResultLessThan(double result){
+        return mathExampleRepository.findByResultLessThan(result);
+    }
+    public List<MathExample> findByResultGreaterThan(double result){
+        return mathExampleRepository.findByResultGreaterThan(result);
+    }
+    public List<MathExample> findByResultEquals(double result){
+        return mathExampleRepository.findByResultEquals(result);
+    }
 
 }

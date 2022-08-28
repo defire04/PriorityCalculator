@@ -1,17 +1,19 @@
 package com.example.controllers;
 
-import com.example.model.MathExample;
-import com.example.services.MathExampleService;
-import com.example.sql.util.MathExampleValidator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import javax.validation.Valid;
 
-import org.springframework.validation.ObjectError;
+
+import org.springframework.expression.spel.SpelEvaluationException;
+import org.springframework.ui.Model;
+import com.example.model.MathExample;
+import com.example.util.MathExampleValidator;
+import com.example.services.MathExampleService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.thymeleaf.exceptions.TemplateProcessingException;
 
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/calculator")
@@ -78,13 +80,10 @@ public class MathExampleController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            for (ObjectError allError : bindingResult.getAllErrors()) {
-                System.out.println(allError.getDefaultMessage());
-            }
             return true;
         }
 
-        mathExample.setResult(Double.toString(Calculator.preparingExpression(mathExample.getExample())));
+        mathExample.setResult(Calculator.preparingExpression(mathExample.getExample()));
         return false;
     }
 
@@ -92,5 +91,28 @@ public class MathExampleController {
     public String delete(@PathVariable("id") int id) {
         mathExampleService.delete(id);
         return "redirect:/calculator";
+    }
+
+    @GetMapping("/search")
+    public String searchPage() {
+        return "calculator/search";
+    }
+
+    @PostMapping("/search")
+    public String search( @RequestParam("searchingRequest") String searchingRequest, Model model) {
+
+        try {
+            if (searchingRequest.charAt(0) == '<') {
+                model.addAttribute("expressions", mathExampleService.findByResultLessThan(Double.parseDouble(searchingRequest.substring(1))));
+            } else if (searchingRequest.charAt(0) == '>') {
+                model.addAttribute("expressions", mathExampleService.findByResultGreaterThan(Double.parseDouble(searchingRequest.substring(1))));
+            } else {
+                model.addAttribute("expressions", mathExampleService.findByResultEquals(Double.parseDouble(searchingRequest.substring(1))));
+            }
+        } catch (SpelEvaluationException | TemplateProcessingException | NumberFormatException exception){
+            return "redirect:/calculator";
+        }
+
+        return "calculator/searchAnswers";
     }
 }
