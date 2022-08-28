@@ -11,8 +11,6 @@ public class Calculator {
         String[] expressionSymbols = expression.split("");
 
         for (int i = 0; i < expressionSymbols.length; i++) {
-
-
             if (expressionSymbols[i].equals("-")) {
                 if (i == 0) {
                     prepareExpression.append("0");
@@ -22,7 +20,6 @@ public class Calculator {
                     prepareExpression.replace(prepareExpression.length() - 1, prepareExpression.length(), "+");
                     continue;
                 } else if (expressionSymbols[i - 1].equals("*") || expressionSymbols[i - 1].equals("/")) {
-                    System.out.println("prr" + prepareExpression);
 
                     prepareExpression.replace(prepareExpression.length() - 2, prepareExpression.length(), "0-"
                             + prepareExpression.toString().charAt(prepareExpression.length() - 2) + prepareExpression.toString().charAt(prepareExpression.length() - 1));
@@ -31,7 +28,6 @@ public class Calculator {
             }
             prepareExpression.append(expression.charAt(i));
         }
-        System.out.println(prepareExpression);
         return expressionToRPN(prepareExpression.toString());
     }
 

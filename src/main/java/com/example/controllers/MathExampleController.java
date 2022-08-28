@@ -113,7 +113,7 @@ public class MathExampleController {
             } else{
                 model.addAttribute("expressions", mathExampleService.findByResultEquals(Double.parseDouble(searchingRequest)));
             }
-        } catch (SpelEvaluationException | TemplateProcessingException exception){
+        } catch (SpelEvaluationException | TemplateProcessingException | NumberFormatException exception){
             model.addAttribute("errors", new ArrayList<>(List.of("Возможно, вы ввели лишние символы!\nВ вашем запросе должен быть только знак и числовое значени!")));
             return "calculator/error";
         }
