@@ -7,7 +7,7 @@
 <body>
 
 <div th:each="error : ${errors}" >
-    <a th:text="${error.getDefaultMessage()}">Error</a>
+    <a th:text="${error}">Error</a>
 </div>
 
 <input type="button" onclick="history.back();" value="Назад"/>

@@ -26,7 +26,7 @@ public class MathExampleValidator implements Validator {
             }
         }
         if(openingBraceCounter != closingBraceCounter){
-            errors.rejectValue("example", "", "Возможно, не хватает открывающих и закрывающих скобок!");
+            errors.rejectValue("example", "", "Возможно, не хватает открывающих или закрывающих скобок!");
         }
     }
 }

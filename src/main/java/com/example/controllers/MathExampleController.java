@@ -1,9 +1,8 @@
 package com.example.controllers;
 
+import java.util.List;
+import java.util.ArrayList;
 import javax.validation.Valid;
-
-
-import org.springframework.expression.spel.SpelEvaluationException;
 import org.springframework.ui.Model;
 import com.example.model.MathExample;
 import com.example.util.MathExampleValidator;
@@ -11,8 +10,10 @@ import com.example.services.MathExampleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.thymeleaf.exceptions.TemplateProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.SpelEvaluationException;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 
 
 @Controller
@@ -79,7 +80,7 @@ public class MathExampleController {
         mathExampleValidator.validate(mathExample, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("errors", bindingResult.getAllErrors());
+            model.addAttribute("errors", bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList());
             return true;
         }
 
@@ -99,6 +100,7 @@ public class MathExampleController {
     }
 
     @PostMapping("/search")
+
     public String search( @RequestParam("searchingRequest") String searchingRequest, Model model) {
 
         try {
@@ -106,13 +108,18 @@ public class MathExampleController {
                 model.addAttribute("expressions", mathExampleService.findByResultLessThan(Double.parseDouble(searchingRequest.substring(1))));
             } else if (searchingRequest.charAt(0) == '>') {
                 model.addAttribute("expressions", mathExampleService.findByResultGreaterThan(Double.parseDouble(searchingRequest.substring(1))));
-            } else {
+            } else if (searchingRequest.charAt(0) == '='){
                 model.addAttribute("expressions", mathExampleService.findByResultEquals(Double.parseDouble(searchingRequest.substring(1))));
+            } else{
+                model.addAttribute("expressions", mathExampleService.findByResultEquals(Double.parseDouble(searchingRequest)));
             }
-        } catch (SpelEvaluationException | TemplateProcessingException | NumberFormatException exception){
-            return "redirect:/calculator";
+        } catch (SpelEvaluationException | TemplateProcessingException exception){
+            model.addAttribute("errors", new ArrayList<>(List.of("Возможно, вы ввели лишние символы!\nВ вашем запросе должен быть только знак и числовое значени!")));
+            return "calculator/error";
         }
 
         return "calculator/searchAnswers";
     }
 }
+
+
