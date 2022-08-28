@@ -1,6 +1,8 @@
 package com.example.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+
 
 @Entity
 @Table(name = "math_example")
@@ -9,6 +11,7 @@ public class MathExample {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Pattern(regexp = "^[^A-Za-z]+$", message = "В выражении есть недопустимые символы!")
     @Column(name = "example")
     private String example;
     @Column(name = "result")

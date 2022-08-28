@@ -3,7 +3,7 @@ package com.example.controllers;
 
 import java.util.Stack;
 
-public class Solver {
+public class Calculator {
 
     public static double preparingExpression(String expression) {
         StringBuilder prepareExpression = new StringBuilder();

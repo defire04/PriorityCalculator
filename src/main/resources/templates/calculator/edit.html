@@ -11,15 +11,19 @@
     <p th:text="${'Неизмененный пример: ' + example.getExample() + '=' + example.getResult()}">VALUE</p>
 
     <label for="example">Введите измененный математический пример: </label>
-
-    <input type="text"  id="example" name="example"/>
+    <input type="text" th:field="*{example}" id="example"/>
     <br/>
 
-    <label for="result">Введите измененный результат примера: </label>
-    <input type="text" id="result" name="result"/>
-    <br/>
 
-    <input type="submit" value="Изменить!"/>
+<!--    <div style="color:red" th:if="${#fields.hasErrors('example')}" th:errors="*{example}">Math Example Error</div>-->
+    <!--    <input type="text"  id="example" name="example"/>-->
+
+
+<!--    <label for="result">Введите измененный результат примера: </label>-->
+<!--    <input type="text" th:field="*{result}" id="result" name="result"/>-->
+<!--    <br/>-->
+
+    <input type="submit" value="Пересчитать!"/>
 </form>
 </body>
 </html>
